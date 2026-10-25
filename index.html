@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Cyber-Pass: password breach checking and threat intelligence investigation.">
+  <title>Cyber-Pass | Security Intelligence</title>
+  <link rel="stylesheet" href="password-checker.css">
+  <script src="password-checker.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#"><span class="brand-mark">CP</span><span>CYBER-PASS<small>SECURITY INTELLIGENCE</small></span></a>
+    <span class="status"><i></i> LOCAL ANALYSIS ENABLED</span>
+  </header>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">PERSONAL SECURITY WORKBENCH</p>
+      <h1>Know your exposure.<br><span>Investigate threats.</span></h1>
+      <p class="subhead">Check password breach exposure and investigate suspicious URLs, domains, IP addresses, and file hashes from one focused security dashboard.</p>
+    </section>
+
+    <nav class="tabs" aria-label="Security tools">
+      <button class="tab active" data-tab="passwordPanel" type="button">Password security</button>
+      <button class="tab" data-tab="intelPanel" type="button">Threat intelligence</button>
+    </nav>
+
+    <section class="panel" id="passwordPanel">
+      <div class="section-heading"><div><p class="eyebrow">01 / CREDENTIAL CHECK</p><h2>Password strength & breach checker</h2></div><span class="pill">HIBP RANGE API</span></div>
+      <p class="muted">Strength is evaluated in your browser. For breach lookup, only the first five characters of the SHA-1 hash are sent to the Pwned Passwords range endpoint.</p>
+      <form id="passwordForm">
+        <label for="password">Password to check</label>
+        <div class="password-box"><input type="password" id="password" placeholder="Enter a password" autocomplete="off" autocapitalize="none" spellcheck="false" required><button type="button" id="showButton">Show</button></div>
+        <div class="strength-line"><div class="meter"><div id="meterFill"></div></div><span id="strengthLabel">Waiting</span></div>
+        <p id="strengthMessage" class="help-text">Type a password to start the local strength check.</p>
+        <div class="buttons"><button class="primary" type="submit" id="checkButton">Check breach exposure</button><button class="secondary" type="button" id="clearButton">Clear</button></div>
+      </form>
+      <div id="result" class="result" role="status" aria-live="polite"></div>
+      <div class="privacy-note"><strong>Privacy note</strong><p>Your raw password is not sent to the breach service. The lookup uses a SHA-1 hash prefix (k-anonymity). Network metadata may still be processed by the API provider. A missing match does not prove a password is safe.</p></div>
+    </section>
+
+    <section class="panel hidden" id="intelPanel">
+      <div class="section-heading"><div><p class="eyebrow">02 / IOC INVESTIGATION</p><h2>Threat intelligence lookup</h2></div><span class="pill">LIVE SOURCES</span></div>
+      <p class="muted">Look up an IP address, domain, URL, or file hash. Results are fetched by the backend from configured providers; unavailable sources are clearly marked rather than simulated.</p>
+      <form id="intelForm">
+        <label for="indicator">Indicator of compromise (IOC)</label>
+        <div class="intel-input-row"><input id="indicator" name="indicator" placeholder="example.com, 8.8.8.8, URL, or file hash" autocomplete="off" spellcheck="false" required><button class="primary" id="lookupButton" type="submit">Investigate</button></div>
+        <div class="quick-types"><span>Supported:</span> URL · Domain · IPv4/IPv6 · MD5 · SHA-1 · SHA-256</div>
+      </form>
+      <div id="intelResult" class="intel-result" aria-live="polite"></div>
+      <div class="privacy-note"><strong>Before you submit</strong><p>Only investigate indicators you are authorized to analyze. The entered indicator is sent to the backend and configured threat-intelligence providers. Do not submit private URLs or sensitive internal indicators unless you have permission.</p></div>
+      <div class="history-section"><div class="section-heading compact"><div><p class="eyebrow">LOCAL SESSION</p><h3>Recent investigations</h3></div><button id="clearHistory" type="button" class="text-button">Clear history</button></div><div id="historyList" class="history-list"><p class="muted">Your recent lookups will appear here during this session.</p></div></div>
+    </section>
+
+    <footer><span>CYBER-PASS</span><span>Evidence-based results · No fabricated detections</span></footer>
+  </main>
+</body>
+</html>
